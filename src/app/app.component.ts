@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { WelcomeService } from './welcome.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sbwelcomeappui';
+
+  msg = "";
+  
+  constructor(@Inject (WelcomeService) private service:WelcomeService){ }
+ 
+  getMsg(){
+    this.service.getWelcomeMsg().subscribe(data => {
+      this.msg = data;
+    });
+  }
+
 }
